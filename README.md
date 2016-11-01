@@ -65,4 +65,4 @@ const truncated = files.map((filename) => smartTruncate(filename, 21, 10));
 
 ## Contributing
 
-In lieu of a formal style guide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
+In lieu of a formal style guide, take care to maintain the existing coding style. Add tests for any new or changed functionality. Lint and test your code.
