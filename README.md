@@ -47,7 +47,7 @@ const truncated = files.map((filename) => smartTruncate(filename, 21, 10));
 ```
 
 **Output**:
-```json
+```js
 [
     '1Password 6.app',
     'Adobe',
