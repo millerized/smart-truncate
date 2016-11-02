@@ -7,6 +7,23 @@ A small library that truncates a string. It can insert or append an ellipsis at 
 
   `npm install smart-truncate`
 
+## Syntax
+```js
+smartTruncate(string, length[, position])
+```
+#### Paramaters
+>**_string_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A string with a minimum lenght of 4 characters.
+
+>**_length_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The length of the truncated result.
+
+>**_position_**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Optional. The index of the ellipsis (zero based). Default is at the end.
+
+#### Return value
+>A new string truncated with an ellipsis.
+
 ## Usage
 ```js
 const smartTruncate = require('smart-truncate');
