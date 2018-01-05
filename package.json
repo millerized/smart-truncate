@@ -2,10 +2,13 @@
   "name": "smart-truncate",
   "version": "0.0.5",
   "description": "A small library that truncates a string. It can insert or append an ellipsis at any desired position of the truncated result.",
-  "main": "src/smart-truncate.js",
+  "main": "dist/smart-truncate.es5.js",
   "scripts": {
     "test": "node_modules/.bin/mocha -R spec src/*.spec.js",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- -R spec src/*.spec.js"
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- -R spec src/*.spec.js",
+    "compile": "./node_modules/.bin/babel src/smart-truncate.js --out-file dist/smart-truncate.es5.js",
+    "minify": "./node_modules/.bin/uglifyjs dist/smart-truncate.es5.js -o dist/smart-truncate.es5.js",
+    "build": "npm run compile && npm run minify"
   },
   "repository": {
     "type": "git",
