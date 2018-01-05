@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/millerized/smart-truncate#readme",
   "devDependencies": {
-    "chai": "^3.5.0",
-    "coveralls": "^2.11.14",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.1.2"
+    "mocha": "^4.1.0"
   }
 }
