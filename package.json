@@ -4,8 +4,8 @@
   "description": "A small library that truncates a string. It can insert or append an ellipsis at any desired position of the truncated result.",
   "main": "smart-truncate.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --reporter spec",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R spec test/*"
+    "test": "node_modules/.bin/mocha -R spec src/*.spec.js",
+    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/.bin/_mocha -- -R spec src/*.spec.js"
   },
   "repository": {
     "type": "git",
