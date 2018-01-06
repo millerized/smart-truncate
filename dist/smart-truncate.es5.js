@@ -3,10 +3,13 @@
 /**
  * smartTruncate - Smartly™ truncate a given string.
  *
- * @param  {String} string      A string with a minimum lenght of 4 chars.
- * @param  {Number} length      The length of the truncated result.
- * @param  {Number} [position]  The index of the ellipsis (zero based). Default is the end.
- * @return {String}             Return a truncated string w/ ellipsis.
+ * @param  {String} string - A string with a minimum lenght of 4 chars.
+ * @param  {Number} length - The length of the truncated result.
+ * @param  {Object} [options]
+ * @param  {Number} [options.position] - The index of the ellipsis (zero based).
+ *                                      Default is the end.
+ * @param  {String} [options.mark = '…'] - The character[s] indicating omission.
+ * @return {String} - Return a truncated string w/ ellipsis.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
  * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
@@ -16,7 +19,7 @@ var smartTruncate = function smartTruncate(string, length) {
         _ref$mark = _ref.mark,
         mark = _ref$mark === undefined ? '\u2026' : _ref$mark,
         _ref$position = _ref.position,
-        position = _ref$position === undefined ? length : _ref$position;
+        position = _ref$position === undefined ? length - 1 : _ref$position;
 
     if (typeof mark !== 'string') return string;
 
