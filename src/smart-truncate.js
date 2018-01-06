@@ -9,7 +9,7 @@
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
  * Example: smartTruncate('Steve Miller', 9, 5) === 'Stev…ller'.
  */
-module.exports = function smartTruncate(string, length, position = length) {
+const smartTruncate = (string, length, position = length) => {
     const ellipsisOffset = 1;
     const minLength = 4;
     let str = string;
@@ -36,3 +36,5 @@ module.exports = function smartTruncate(string, length, position = length) {
 
     return `${start}…${end}`;
 }
+
+module.exports = smartTruncate;
