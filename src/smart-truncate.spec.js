@@ -61,4 +61,23 @@ describe('smartTruncate(string, length[, position])', () => {
         expect(smartTruncate(undefined, 3)).to.equal(undefined);
         expect(smartTruncate(null, 3)).to.equal(null);
     });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/7
+    it('should assert the correct index of the given position and length of truncated result', () => {
+        const str = 'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz';
+        const length = 50;
+        const ellipsisOffset = 1;
+
+        for (var i = length; i > -1; i--) {
+            const expectedIndex = (i >= (length - ellipsisOffset))
+                ? (length - 1)
+                : i;
+
+            const truncated = smartTruncate(str, length, i);
+            const resultIndex = truncated.indexOf('…');
+
+            expect(resultIndex).to.equal(expectedIndex);
+            expect(truncated.length).to.equal(length)
+        }
+    });
 });

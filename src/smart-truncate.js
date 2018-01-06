@@ -12,6 +12,7 @@
 const smartTruncate = (string, length, position = length) => {
     const ellipsisOffset = 1;
     const minLength = 4;
+
     let str = string;
 
     if (typeof str === 'string') {
@@ -26,7 +27,7 @@ const smartTruncate = (string, length, position = length) => {
 
     if (invalid) return string;
 
-    if (position >= length) {
+    if (position >= (length - ellipsisOffset)) {
         const start = str.substring(0, length - ellipsisOffset);
         return `${start}…`;
     }

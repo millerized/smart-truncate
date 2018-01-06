@@ -16,6 +16,7 @@ var smartTruncate = function smartTruncate(string, length) {
 
     var ellipsisOffset = 1;
     var minLength = 4;
+
     var str = string;
 
     if (typeof str === 'string') {
@@ -26,7 +27,7 @@ var smartTruncate = function smartTruncate(string, length) {
 
     if (invalid) return string;
 
-    if (position >= length) {
+    if (position >= length - ellipsisOffset) {
         var _start = str.substring(0, length - ellipsisOffset);
         return _start + '\u2026';
     }
