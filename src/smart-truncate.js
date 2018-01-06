@@ -7,7 +7,7 @@
  * @return {String}             Return a truncated string w/ ellipsis.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
- * Example: smartTruncate('Steve Miller', 9, 5) === 'Stev…ller'.
+ * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
  */
 const smartTruncate = (string, length, position = length) => {
     const ellipsisOffset = 1;

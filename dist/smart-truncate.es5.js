@@ -9,7 +9,7 @@
  * @return {String}             Return a truncated string w/ ellipsis.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
- * Example: smartTruncate('Steve Miller', 9, 5) === 'Stev…ller'.
+ * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
  */
 var smartTruncate = function smartTruncate(string, length) {
     var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : length;
