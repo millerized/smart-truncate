@@ -1,7 +1,7 @@
 'use strict';
 
-const smartTruncate = require('./smart-truncate');
 const {expect} = require('chai');
+const smartTruncate = require('../dist/smart-truncate.es5');
 
 describe('smartTruncate(string, length[, position])', () => {
     it('should return a smart truncated string w/ an ellipsis at the 4th index position of the given string', () => {
