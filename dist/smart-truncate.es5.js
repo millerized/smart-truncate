@@ -9,10 +9,10 @@
  * @param  {Number} [options.position] - The index of the ellipsis (zero based).
  *                                      Default is the end.
  * @param  {String} [options.mark = '…'] - The character[s] indicating omission.
- * @return {String} - Return a truncated string w/ ellipsis.
+ * @return {String} - Return a truncated string w/ ellipsis or a custom mark.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
- * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
+ * Example: smartTruncate('Steve Miller', 9, {position: 4}) === 'Stev…ller'.
  */
 var smartTruncate = function smartTruncate(string, length) {
     var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
