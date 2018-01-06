@@ -57,10 +57,10 @@ describe('smartTruncate()', () => {
     });
 
     it('should return the original, given value when given a non-String value or non-String mark', () => {
-        expect(smartTruncate(1000, 3)).to.equal(1000);
-        expect(smartTruncate(undefined, 3)).to.equal(undefined);
-        expect(smartTruncate(null, 3)).to.equal(null);
-        expect(smartTruncate('I am so tired', 3, {mark: null})).to.equal('I am so tired');
+        expect(smartTruncate(10000000, 5)).to.equal(10000000);
+        expect(smartTruncate(undefined, 5)).to.equal(undefined);
+        expect(smartTruncate(null, 5)).to.equal(null);
+        expect(smartTruncate('I am so tired', 5, {mark: null})).to.equal('I am so tired');
     });
 
     // ref: https://github.com/millerized/smart-truncate/issues/7
