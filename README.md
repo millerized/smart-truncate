@@ -1,28 +1,31 @@
 Smart Truncate [![Build Status](https://travis-ci.org/millerized/smart-truncate.svg?branch=master)](https://travis-ci.org/millerized/smart-truncate) [![Coverage Status](https://coveralls.io/repos/github/millerized/smart-truncate/badge.svg?branch=master)](https://coveralls.io/github/millerized/smart-truncate?branch=master)
 =========
 
-A small library that truncates a string. It can insert or append an ellipsis at any desired position of the truncated result.
+A small library that truncates a string. It can insert or append an ellipsis (or a custom mark) at any desired position of the truncated result.
 
 ## Installation
 
-  `npm install smart-truncate`
+  `npm install --save smart-truncate`
 
 ## Syntax
 ```js
-smartTruncate(string, length[, position])
+smartTruncate(string, length[, options])
 ```
 #### Paramaters
 >**_string_**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;A string with a minimum lenght of 4 characters.
+&emsp;A string with a minimum length of 4 characters.
 
 >**_length_**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;The length of the truncated result.
+&emsp;The length of the truncated result.
 
->**_position_**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Optional. The index of the ellipsis (zero based). Default is at the end.
+>**_options_**<br>
+>**_options.position_**<br>
+&emsp;Optional. The index of the ellipsis (zero based). Default is at the end.<br>
+>**_options.mark_**<br>
+&emsp;Optional. The character[s] indicating omission. Default is an ellipsis "…".
 
 #### Return value
->A new string truncated with an ellipsis.
+>A new string truncated with an ellipsis or custom mark.
 
 ## Usage
 ```js
@@ -42,7 +45,7 @@ const truncated = smartTruncate(string, 15);
 const string = 'To iterate is human, to recurse divine.';
 
 // Insert an ellipsis in the middle of a smart truncated string.
-const truncated = smartTruncate(string, 21, 10);
+const truncated = smartTruncate(string, 21, {position: 10});
 ```
 
 **Output**: `"To iterate…se divine."`
@@ -60,7 +63,7 @@ const files = [
     'App Store.app'
 ];
 
-const truncated = files.map((filename) => smartTruncate(filename, 21, 10));
+const truncated = files.map((filename) => smartTruncate(filename, 21, {position: 10}));
 ```
 
 **Output**:

@@ -3,18 +3,27 @@
 /**
  * smartTruncate - Smartly™ truncate a given string.
  *
- * @param  {String} string      A string with a minimum lenght of 4 chars.
- * @param  {Number} length      The length of the truncated result.
- * @param  {Number} [position]  The index of the ellipsis (zero based). Default is the end.
- * @return {String}             Return a truncated string w/ ellipsis.
+ * @param  {String} string - A string with a minimum lenght of 4 chars.
+ * @param  {Number} length - The length of the truncated result.
+ * @param  {Object} [options]
+ * @param  {Number} [options.position] - The index of the ellipsis (zero based).
+ *                                      Default is the end.
+ * @param  {String} [options.mark = '…'] - The character[s] indicating omission.
+ * @return {String} - Return a truncated string w/ ellipsis or a custom mark.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
- * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
+ * Example: smartTruncate('Steve Miller', 9, {position: 4}) === 'Stev…ller'.
  */
 var smartTruncate = function smartTruncate(string, length) {
-    var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : length;
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+        _ref$mark = _ref.mark,
+        mark = _ref$mark === undefined ? '\u2026' : _ref$mark,
+        _ref$position = _ref.position,
+        position = _ref$position === undefined ? length - 1 : _ref$position;
 
-    var ellipsisOffset = 1;
+    if (typeof mark !== 'string') return string;
+
+    var markOffset = mark.length;
     var minLength = 4;
 
     var str = string;
@@ -23,19 +32,19 @@ var smartTruncate = function smartTruncate(string, length) {
         str = str.trim();
     }
 
-    var invalid = typeof str !== 'string' || str.length < minLength || typeof length !== 'number' || length <= minLength || length >= str.length - ellipsisOffset;
+    var invalid = typeof str !== 'string' || str.length < minLength || typeof length !== 'number' || length <= minLength || length >= str.length - markOffset;
 
     if (invalid) return string;
 
-    if (position >= length - ellipsisOffset) {
-        var _start = str.substring(0, length - ellipsisOffset);
-        return _start + '\u2026';
+    if (position >= length - markOffset) {
+        var _start = str.substring(0, length - markOffset);
+        return '' + _start + mark;
     }
 
     var start = str.substring(0, position);
-    var end = str.slice(position + ellipsisOffset - length);
+    var end = str.slice(position + markOffset - length);
 
-    return start + '\u2026' + end;
+    return '' + start + mark + end;
 };
 
 module.exports = smartTruncate;
