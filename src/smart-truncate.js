@@ -7,11 +7,12 @@
  * @return {String}             Return a truncated string w/ ellipsis.
  *
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
- * Example: smartTruncate('Steve Miller', 9, 5) === 'Stev…ller'.
+ * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
  */
-module.exports = function smartTruncate(string, length, position = length) {
+const smartTruncate = (string, length, position = length) => {
     const ellipsisOffset = 1;
     const minLength = 4;
+
     let str = string;
 
     if (typeof str === 'string') {
@@ -26,7 +27,7 @@ module.exports = function smartTruncate(string, length, position = length) {
 
     if (invalid) return string;
 
-    if (position >= length) {
+    if (position >= (length - ellipsisOffset)) {
         const start = str.substring(0, length - ellipsisOffset);
         return `${start}…`;
     }
@@ -36,3 +37,5 @@ module.exports = function smartTruncate(string, length, position = length) {
 
     return `${start}…${end}`;
 }
+
+module.exports = smartTruncate;
