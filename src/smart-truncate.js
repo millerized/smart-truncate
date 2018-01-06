@@ -9,8 +9,15 @@
  * Example: smartTruncate('Steve Miller', 8) === 'Steve M…'.
  * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
  */
-const smartTruncate = (string, length, position = length) => {
-    const ellipsisOffset = 1;
+const smartTruncate = (string, length,
+    {
+        mark = '\u2026', // ellipsis = …
+        position = length,
+    } = {}
+) => {
+    if (typeof mark !== 'string') return string;
+
+    const markOffset = mark.length;
     const minLength = 4;
 
     let str = string;
@@ -23,19 +30,19 @@ const smartTruncate = (string, length, position = length) => {
         || str.length < minLength
         || typeof length !== 'number'
         || length <= minLength
-        || length >= (str.length - ellipsisOffset);
+        || length >= (str.length - markOffset);
 
     if (invalid) return string;
 
-    if (position >= (length - ellipsisOffset)) {
-        const start = str.substring(0, length - ellipsisOffset);
-        return `${start}…`;
+    if (position >= (length - markOffset)) {
+        const start = str.substring(0, length - markOffset);
+        return `${start}${mark}`;
     }
 
     const start = str.substring(0, position);
-    const end = str.slice((position + ellipsisOffset) - length);
+    const end = str.slice((position + markOffset) - length);
 
-    return `${start}…${end}`;
+    return `${start}${mark}${end}`;
 }
 
 module.exports = smartTruncate;

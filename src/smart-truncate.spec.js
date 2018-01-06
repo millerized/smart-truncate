@@ -3,14 +3,14 @@
 const {expect} = require('chai');
 const smartTruncate = require('../dist/smart-truncate.es5');
 
-describe('smartTruncate(string, length[, position])', () => {
+describe('smartTruncate()', () => {
     it('should return a smart truncated string w/ an ellipsis at the 4th index position of the given string', () => {
-        expect(smartTruncate('Steve Miller', 9, 4)).to.equal('Stev…ller');
+        expect(smartTruncate('Steve Miller', 9, {position: 4})).to.equal('Stev…ller');
     });
 
     it('should assert that the length of the truncated string is equal to the given length w/ an ellipsis at the 4th index position', () => {
         const length = 9;
-        const truncated = smartTruncate('Steve Miller', length, 4);
+        const truncated = smartTruncate('Steve Miller', length, {position: 4});
         expect(truncated.length).to.equal(length);
     });
 
@@ -25,11 +25,11 @@ describe('smartTruncate(string, length[, position])', () => {
     });
 
     it('should return a smart truncated string w/ an ellipsis at the 5th index position of the given string', () => {
-        expect(smartTruncate('Steve Miller', 9, 5)).to.equal('Steve…ler');
+        expect(smartTruncate('Steve Miller', 9, {position: 5})).to.equal('Steve…ler');
     });
 
     it('should return a smart truncated string w/ an ellipsis at the 8th index position of the given string', () => {
-        expect(smartTruncate('Not a good fit', 12, 8)).to.equal('Not a go…fit');
+        expect(smartTruncate('Not a good fit', 12, {position: 8})).to.equal('Not a go…fit');
     });
 
     it('should return the given string when given a length that is larger than the given string', () => {
@@ -41,7 +41,7 @@ describe('smartTruncate(string, length[, position])', () => {
     });
 
     it('should append an ellipsis to the end of the truncated string when given a position that is larger than the given string and length', () => {
-        expect(smartTruncate('Steve Miller', 10, 14)).to.equal('Steve Mil…');
+        expect(smartTruncate('Steve Miller', 10, {position: 14})).to.equal('Steve Mil…');
     });
 
     it('should return the given string when given an undefined length', () => {
@@ -56,10 +56,11 @@ describe('smartTruncate(string, length[, position])', () => {
         expect(smartTruncate('Ste ', 2)).to.equal('Ste ');
     });
 
-    it('should return the original, given value when given a non-String value', () => {
+    it('should return the original, given value when given a non-String value or non-String mark', () => {
         expect(smartTruncate(1000, 3)).to.equal(1000);
         expect(smartTruncate(undefined, 3)).to.equal(undefined);
         expect(smartTruncate(null, 3)).to.equal(null);
+        expect(smartTruncate('I am so tired', 3, {mark: null})).to.equal('I am so tired');
     });
 
     // ref: https://github.com/millerized/smart-truncate/issues/7
@@ -67,17 +68,44 @@ describe('smartTruncate(string, length[, position])', () => {
         const str = 'abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz';
         const length = 50;
         const ellipsisOffset = 1;
+        const lastCharIndex = (length - 1);
 
         for (var i = length; i > -1; i--) {
-            const expectedIndex = (i >= (length - ellipsisOffset))
-                ? (length - 1)
+            const expectedIndex = (i >= lastCharIndex)
+                ? lastCharIndex
                 : i;
 
-            const truncated = smartTruncate(str, length, i);
+            const truncated = smartTruncate(str, length, {position: i});
             const resultIndex = truncated.indexOf('…');
 
             expect(resultIndex).to.equal(expectedIndex);
             expect(truncated.length).to.equal(length)
         }
+    });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/5
+    it('should return truncated string using a custom mark given instead of the default ellipsis', () => {
+        const expected = 'abc—xyz';
+
+        const result = smartTruncate('abcdefghijklmnopqrstuvwxyz', 7, {
+            position: 3,
+            mark: '—',
+        });
+
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+    });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/5
+    it('should return truncated string using a long custom mark given instead of the default ellipsis', () => {
+        const expected = 'abc***xyz';
+
+        const result = smartTruncate('abcdefghijklmnopqrstuvwxyz', 9, {
+            position: 3,
+            mark: '***',
+        });
+
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
     });
 });

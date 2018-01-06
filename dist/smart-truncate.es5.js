@@ -12,9 +12,15 @@
  * Example: smartTruncate('Steve Miller', 9, 4) === 'Stev…ller'.
  */
 var smartTruncate = function smartTruncate(string, length) {
-    var position = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : length;
+    var _ref = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+        _ref$mark = _ref.mark,
+        mark = _ref$mark === undefined ? '\u2026' : _ref$mark,
+        _ref$position = _ref.position,
+        position = _ref$position === undefined ? length : _ref$position;
 
-    var ellipsisOffset = 1;
+    if (typeof mark !== 'string') return string;
+
+    var markOffset = mark.length;
     var minLength = 4;
 
     var str = string;
@@ -23,19 +29,19 @@ var smartTruncate = function smartTruncate(string, length) {
         str = str.trim();
     }
 
-    var invalid = typeof str !== 'string' || str.length < minLength || typeof length !== 'number' || length <= minLength || length >= str.length - ellipsisOffset;
+    var invalid = typeof str !== 'string' || str.length < minLength || typeof length !== 'number' || length <= minLength || length >= str.length - markOffset;
 
     if (invalid) return string;
 
-    if (position >= length - ellipsisOffset) {
-        var _start = str.substring(0, length - ellipsisOffset);
-        return _start + '\u2026';
+    if (position >= length - markOffset) {
+        var _start = str.substring(0, length - markOffset);
+        return '' + _start + mark;
     }
 
     var start = str.substring(0, position);
-    var end = str.slice(position + ellipsisOffset - length);
+    var end = str.slice(position + markOffset - length);
 
-    return start + '\u2026' + end;
+    return '' + start + mark + end;
 };
 
 module.exports = smartTruncate;
