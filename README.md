@@ -5,7 +5,13 @@ A small library that truncates a string. It can insert or append an ellipsis (or
 
 ## Installation
 
-  `npm install --save smart-truncate`
+```bash
+# With yarn.
+yarn add smart-truncate;
+
+# With npm.
+npm install --save smart-truncate;
+```
 
 ## Syntax
 ```js
