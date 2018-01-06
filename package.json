@@ -1,6 +1,6 @@
 {
   "name": "smart-truncate",
-  "version": "0.0.5",
+  "version": "0.1.6",
   "description": "A small library that truncates a string. It can insert or append an ellipsis at any desired position of the truncated result.",
   "main": "dist/smart-truncate.es5.js",
   "scripts": {
