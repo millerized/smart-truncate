@@ -25,7 +25,7 @@ smartTruncate(string, length[, options])
 &emsp;Optional. The character[s] indicating omission. Default is an ellipsis "…".
 
 #### Return value
->A new string truncated with an ellipsis.
+>A new string truncated with an ellipsis or custom mark.
 
 ## Usage
 ```js
