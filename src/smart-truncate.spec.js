@@ -108,4 +108,48 @@ describe('smartTruncate()', () => {
         expect(result).to.equal(expected);
         expect(result.length).to.equal(expected.length);
     });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/10
+    it('should return truncated string with ellipsis at the right end of the string by default / if specified', () => {
+        const expected = 'A quick brown fox…';
+
+        let result = smartTruncate('A quick brown fox jumped over the lazy dog', 18);
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+
+        result = smartTruncate('A quick brown fox jumped over the lazy dog', 18, {
+            position: 'right',
+        });
+
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+    });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/10
+    it('should return truncated string with ellipsis at the left end of the string if specified', () => {
+        const expected = '…jumped over the lazy dog';
+
+        const result = smartTruncate('A quick brown fox jumped over the lazy dog', 25, {
+            position: 'left',
+        });
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+    });
+
+    // ref: https://github.com/millerized/smart-truncate/issues/10
+    it('should return truncated string with ellipsis at the center of the string if specified', () => {
+        let expected = 'A quick brown…the lazy dog';
+
+        let result = smartTruncate('A quick brown fox jumped over the lazy dog', 26, {
+            position: 'center',
+        });
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+
+        expected = 'It was the best of time… the age of foolishness';
+        const twoCities = 'It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness';
+        result = smartTruncate(twoCities, 47, {position: 'center'});
+        expect(result).to.equal(expected);
+        expect(result.length).to.equal(expected.length);
+    });
 });
